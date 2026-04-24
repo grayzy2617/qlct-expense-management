@@ -1,0 +1,676 @@
+﻿-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\ApiResponse.java --
+package com.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)// Chá»‰ bao gá»“m cÃ¡c trÆ°á»ng khÃ´ng null trong JSON tráº£ vá» client
+public class ApiResponse {
+    private  int  code;
+    private String message;
+    private Object data;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\admin\response\UserDetailResponse.java --
+package com.dto.admin.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserDetailResponse {
+    String userId;
+    String username;
+    LocalDateTime createdAt;
+    List<String> roles;
+    UserStatistics statistics;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\admin\response\UserListItemResponse.java --
+package com.dto.admin.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserListItemResponse {
+    String userId;
+    String username;
+    LocalDateTime createdAt;
+    Integer totalCategories;
+    Integer totalItems;
+    Integer totalSavings;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\admin\response\UserStatistics.java --
+package com.dto.admin.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserStatistics {
+    Integer totalCategories;
+    Integer totalItems;
+    Integer totalSavings;
+    Double totalIncome;
+    Double totalExpense;
+    Double balance; // totalIncome - totalExpense
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\authentication\request\AuthenticationRequest.java --
+package com.dto.authentication.request;
+
+
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class AuthenticationRequest {
+    @Size(min = 2, max = 50, message = "USERNAME_INVALID")
+    String username;
+
+//    @PwConstraint()
+@Size(min = 2, max = 50, message = "USERNAME_INVALID")
+    String password;
+
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\authentication\request\IntrospectRequest.java --
+package com.dto.authentication.request;
+
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class  IntrospectRequest {
+    @NotBlank(message = "TOKEN_INVALID")
+    @Size(min = 10, max = 500, message = "TOKEN_INVALID")
+    String token;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\authentication\request\LogoutRequest.java --
+package com.dto.authentication.request;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class  LogoutRequest {
+    @NotBlank(message = "TOKEN_INVALID")
+    @Size(min = 10, max = 500, message = "TOKEN_INVALID")
+    String token;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\authentication\request\RefreshRequest.java --
+package com.dto.authentication.request;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class  RefreshRequest {
+    @NotBlank(message = "TOKEN_INVALID")
+    @Size(min = 10, max = 500, message = "TOKEN_INVALID")
+    String token;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\authentication\response\AuthenticationResponse.java --
+package com.dto.authentication.response;
+
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class AuthenticationResponse {
+
+    boolean authenticated;
+    String token;
+
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\authentication\response\IntrospectResponse.java --
+package com.dto.authentication.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class IntrospectResponse {
+    boolean active;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\category\request\CategoriesByTypeAndRangeRequest.java --
+package com.dto.category.request;
+
+
+import com.validator.DateRangeConstraint;
+import com.validator.MonthConstraint;
+import com.validator.TypeConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//
+public class CategoriesByTypeAndRangeRequest {
+
+     @TypeConstraint()
+    String type;
+    @MonthConstraint()
+
+    int month;
+    int year;
+
+
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\category\request\CategoriesByTypeAndYearRequest.java --
+package com.dto.category.request;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class CategoriesByTypeAndYearRequest {
+    String type;  // "INCOME" hoáº·c "EXPENSE"
+    int year;     // NÄƒm cáº§n query
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\category\request\CategoryCreateRequest.java --
+package com.dto.category.request;
+
+
+import com.validator.AmountConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class CategoryCreateRequest {
+     String userID;
+     String name;
+     String type ;
+     @AmountConstraint()
+     double limitAmount;
+
+}
+// quy táº¯c hiá»‡n táº¡i lÃ  id lÃ  Ä‘á»ƒ id
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\category\request\CategoryUpdateRequest.java --
+package com.dto.category.request;
+
+
+import com.validator.AmountConstraint;
+import com.validator.TypeConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class CategoryUpdateRequest {
+    String categoryName;
+    @TypeConstraint()
+    String type ;
+    @AmountConstraint(min = 0.0) // Cho phÃ©p 0 (khÃ´ng giá»›i háº¡n)
+    double limitAmount;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\category\response\CategoryResponse.java --
+package com.dto.category.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class CategoryResponse {
+    String id;
+    String userID;
+    String name;
+    String type ;
+    double limitAmount;
+    double spentSum;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\item\request\ItemCreateRequest.java --
+package com.dto.item.request;
+
+import com.validator.AmountConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class ItemCreateRequest {
+    String userID;
+    String categoryID;
+    String description;
+    @AmountConstraint()
+    double amount;
+    LocalDateTime createdAt; // Thá»i gian giao dá»‹ch
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\item\request\ItemsByCategoryAndRangeRequest.java --
+package com.dto.item.request;
+
+import com.validator.DateRangeConstraint;
+import com.validator.MonthConstraint;
+import com.validator.TypeConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//
+public class ItemsByCategoryAndRangeRequest {
+    String categoryID;
+    @MonthConstraint()
+     int month;
+
+    int year;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\item\request\ItemsByTypeAndRangeRequest.java --
+package com.dto.item.request;
+
+
+import com.validator.DateRangeConstraint;
+import com.validator.MonthConstraint;
+import com.validator.TypeConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//
+public class ItemsByTypeAndRangeRequest {
+    @TypeConstraint()
+    String type;
+    @MonthConstraint()
+   int month;
+    int year;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\item\request\ItemsByTypeAndYearRequest.java --
+package com.dto.item.request;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class ItemsByTypeAndYearRequest {
+    String type;  // "INCOME" hoáº·c "EXPENSE"
+    int year;     // NÄƒm cáº§n query
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\item\request\ItemUpdateRequest.java --
+package com.dto.item.request;
+
+import com.validator.AmountConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class ItemUpdateRequest {
+    String description;
+    double amount;
+    LocalDateTime createdAt;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\item\response\ItemResponse.java --
+package com.dto.item.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)//
+public class ItemResponse {
+    String id;
+    String categoryID;
+    String userID;
+    String description;
+    Double amount;
+    LocalDateTime createdAt;
+
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\monthrange\request\MonthUpdateBatchRequest.java --
+package com.dto.monthrange.request;
+import com.validator.MonthConstraint;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+// 1. Request cáº­p nháº­t chu ká»³ thÃ¡ng
+@Data @NoArgsConstructor @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class MonthUpdateBatchRequest {
+    @Min(1)
+    @Max(31)
+    int startDay;
+
+    @MonthConstraint()
+    int baseMonth;  // ThÃ¡ng báº¯t Ä‘áº§u cá»§a range (vÃ­ dá»¥: 1 trong range 15/1-14/2)
+
+    @MonthConstraint()
+    int targetMonth;  // ThÃ¡ng mÃ  ngÆ°á»i dÃ¹ng chá»n gá»i range nÃ y lÃ  thÃ¡ng máº¥y
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\monthrange\response\MonthRangeResponse.java --
+package com.dto.monthrange.response;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data @Builder
+@NoArgsConstructor @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class MonthRangeResponse {
+    int month;
+    LocalDateTime start;
+    LocalDateTime end;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\rangeDate\DateRangeResponse.java --
+package com.dto.rangeDate;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class DateRangeResponse {
+    String startDate;  // Format: "dd/MM/yyyy"
+    String endDate;    // Format: "dd/MM/yyyy"
+    String description; // VÃ­ dá»¥: "ThÃ¡ng 1/2026: 02/01 - 01/02"
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\rangeDate\RangeDate.java --
+package com.dto.rangeDate;
+
+import com.validator.DateRangeConstraint;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class RangeDate {
+    LocalDateTime start;
+    LocalDateTime end;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\saving\request\SavingCreateRequest.java --
+package com.dto.saving.request;
+
+import com.validator.DateRangeConstraint;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@DateRangeConstraint()
+public class SavingCreateRequest {
+    String name;
+    Double limitAmount; // Sá»‘ tiá»n má»¥c tiÃªu (Target)
+    LocalDateTime startDate;
+    LocalDateTime endDate;
+    Boolean viewInReport;
+    Boolean status; // true: Ongoing, false: Finished
+
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\saving\request\SavingUpdateRequest.java --
+package com.dto.saving.request;
+
+import com.validator.DateRangeConstraint;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@DateRangeConstraint()
+public class SavingUpdateRequest {
+    String name;
+    Double limitAmount;
+    LocalDateTime startDate;
+    LocalDateTime endDate;
+    Boolean viewInReport;
+    // KhÃ´ng cho phÃ©p sá»­a Status á»Ÿ Ä‘Ã¢y (dÃ¹ng API toggle riÃªng)
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\saving\response\SavingResponse.java --
+package com.dto.saving.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class SavingResponse {
+    String categoryId; // ID cá»§a Saving
+    String userId;
+    String name;
+    Double limitAmount; // Má»¥c tiÃªu
+    Double savedAmount; // Sá»‘ tiá»n hiá»‡n cÃ³ (ÄÆ°á»£c tÃ­nh toÃ¡n tá»« Service)
+
+    LocalDateTime startDate;
+    LocalDateTime endDate;
+
+    boolean status;       // true: Äang cháº¡y, false: HoÃ n thÃ nh
+    boolean viewInReport; // CÃ³ hiá»‡n trong bÃ¡o cÃ¡o tá»•ng khÃ´ng
+
+    // Helper: TÃ­nh % hoÃ n thÃ nh cho Frontend (JSP)
+    public int getProgressPercent() {
+        if (this.limitAmount == null || this.limitAmount == 0) return 0;
+        if (this.savedAmount == null) this.savedAmount = 0.0;
+
+        int p = (int) ((this.savedAmount / this.limitAmount) * 100);
+
+        // Giá»›i háº¡n max 100% Ä‘á»ƒ giao diá»‡n khÃ´ng bá»‹ vá»¡
+        return p > 100 ? 100 : Math.max(p, 0);
+    }
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\user\request\ChangePasswordRequest.java --
+package com.dto.user.request;
+
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class ChangePasswordRequest {
+
+
+
+//    @PwConstraint()
+    String oldPassword;
+
+//    @PwConstraint()
+    String newPassword;
+
+//    @PwConstraint()
+    String confirmNewPassword;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\user\request\UpdateUserRequest.java --
+package com.dto.user.request;
+
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class UpdateUserRequest {
+    String name;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\user\request\UserRegisterRequest.java --
+package com.dto.user.request;
+
+
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)//  Tá»± Ä‘á»™ng Ä‘áº·t táº¥t cáº£ cÃ¡c trÆ°á»ng lÃ  private
+public class UserRegisterRequest {
+    @Size(min = 2, max = 50, message = "USERNAME_INVALID")
+    String username;
+
+//    @PwConstraint()
+    String password;
+
+//    @PwConstraint()
+    String confirmPassword;
+}
+-- D:\5rd_semester\SpringBoot\qlct-expense-management\backend\src\main\java\com\dto\user\response\UserResponse.java --
+package com.dto.user.response;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserResponse {
+    String id;
+    String username;
+    Integer startDay;
+    Boolean isCalcByNextMonth;
+}

@@ -1,0 +1,41 @@
+# Ignore Maven build files
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# Ignore Node modules and build files
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.vite/
+
+# Environment files - DO NOT COMMIT
+backend/src/main/resources/application.properties
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Compiled class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
